@@ -20,6 +20,7 @@ CREATE TABLE `Blog` (
                         `description` text,
                         `user_id` int NOT NULL,
                         `image_id` int,
+                        `views` int DEFAULT 0,
                         `created_at` datetime DEFAULT (current_timestamp),
                         `updated_at` datetime DEFAULT (current_timestamp)
 );
@@ -31,6 +32,7 @@ CREATE TABLE `Post` (
                         `blog_id` int NOT NULL,
                         `category_id` int NOT NULL,
                         `image_id` int,
+                        `views` int DEFAULT 0,
                         `created_at` datetime DEFAULT (current_timestamp),
                         `updated_at` datetime DEFAULT (current_timestamp)
 );
