@@ -1,0 +1,27 @@
+### user 생성
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "testU12321231312313123ser2@2n2a2ve2r2.com",
+  "password": "password123"
+}
+
+### Login
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "testU12321231312313123ser2@2n2a2ve2r2.com",
+  "password": "password123"
+}
+
+### Logout
+POST http://localhost:8080/auth/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjEzLCJzdWIiOiJ0ZXN0VTEyMzIxMjMxMzEyMzEzMTIzc2VyMkAybjJhMnZlMnIyLmNvbSIsImlhdCI6MTcyMDEwNjg0NiwiZXhwIjoxNzIwMTEwNDQ2fQ.hA_9PFxG0ysdQh78u9wL-GVrAlGqYocdPcpzvftj6_GLWKEzth9HLQhY_u4fgQj3rWe6M_CJXpzk6sUMz_-dPw
+
+### Access Token 재발급
+POST http://localhost:8080/auth/refresh
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0VXNlcjJAbmF2ZXIuY29tIiwiaWF0IjoxNzIwMTAxNDI4LCJleHAiOjE3MjAxODc4Mjh9.AT2zP2C6QuH3o-OhNdLzPeLYLyGoc2xyyxdhWBxoWpZTL_0pZmc_to7yjQYZL2YmDNGzpyWwklDKd1NCCzU6sg
