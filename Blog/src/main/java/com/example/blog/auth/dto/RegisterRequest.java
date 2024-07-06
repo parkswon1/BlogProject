@@ -12,6 +12,9 @@ public class RegisterRequest {
     @Email(message = "username은 이메일 형식이여야 합니다.")
     private String username;
 
+    @NotBlank(message = "별명이 필요합니다.")
+    private String name;
+
     @NotBlank(message = "비밀번호가 있어야 합니다.")
     private String password;
 }
