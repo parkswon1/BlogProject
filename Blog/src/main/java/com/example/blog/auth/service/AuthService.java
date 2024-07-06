@@ -38,6 +38,7 @@ public class AuthService {
 
         User user = new User();
         user.setUsername(registerRequest.getUsername());
+        user.setName(registerRequest.getName());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         userRepository.save(user);
 
@@ -115,6 +116,7 @@ public class AuthService {
             } else {
                 throw new CustomException("유효하지 않은 리프레시 토큰입니다.");
             }
+
         } catch (Exception e) {
             throw new CustomException("토큰 재발급 중 오류가 발생했습니다:");
         }
