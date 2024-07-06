@@ -72,6 +72,7 @@ public class WebSecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("*"); //모든 도메인 허용
+//        config.addAllowedOrigin("http://localhost:3000"); //프론트 엔드 도메인만 허용
         config.addAllowedHeader("*"); //모든 HTTP 메서드 허용
         config.setAllowedMethods(List.of("GET","POST","DELETE")); // 명시적으로 GET, POST, DELETE 메서드 허용
         source.registerCorsConfiguration("/**",config);
