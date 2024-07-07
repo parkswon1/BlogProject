@@ -8,5 +8,5 @@ import java.io.IOException;
 public interface ImageService {
     Image saveImage(MultipartFile file) throws IOException;
     Image findById(Long id);
-    String getImageUrl(Image image, boolean isThumbnail);
+    String getImageUrl(Image image);
 }
