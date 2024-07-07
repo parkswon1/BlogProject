@@ -12,10 +12,11 @@ public class ImageEventListener {
     private final ImageService imageService;
 
     @EventListener
-    public Image handleImageSaveEvent(ImageSaveEvent event){
+    public void handleImageSaveEvent(ImageSaveEvent event) {
         try {
-            return imageService.saveImage(event.getFile());
-        }catch (Exception e){
+            Image image = imageService.saveImage(event.getFile());
+            event.getCallback().accept(image);
+        } catch (Exception e) {
             throw new RuntimeException("image 저장 실패", e);
         }
     }
