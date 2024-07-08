@@ -10,7 +10,7 @@ public class ImageWebConfig implements WebMvcConfigurer {
     private final String uploadPath;
 
     public ImageWebConfig(@Value("${LOCAL_IMAGE_PATH}") String uploadPath){
-        this.uploadPath = uploadPath;
+        this.uploadPath = "file:" + uploadPath;
     }
 
     @Override
