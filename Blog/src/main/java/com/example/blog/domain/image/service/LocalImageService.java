@@ -33,8 +33,11 @@ public class LocalImageService implements ImageService{
         String uploadDir = uploadPath + datePath;
         File dir = new File(uploadDir);
 
-        if (!dir.exists()){
-            dir.mkdir();
+        if (!dir.exists()) {
+            boolean created = dir.mkdirs();
+            if (!created) {
+                throw new IOException("Failed to create directory: " + uploadDir);
+            }
         }
 
         String uuid = UUID.randomUUID().toString();
@@ -61,6 +64,6 @@ public class LocalImageService implements ImageService{
 
     @Override
     public String getImageUrl(Image image) {
-        return null;
+        return image.getUrl();
     }
 }

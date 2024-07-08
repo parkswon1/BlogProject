@@ -29,9 +29,9 @@ public class User {
     @JoinColumn(name = "image_id")
     private Image image;
 
-    @Column(nullable = false, updatable = false, insertable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false, updatable = false, insertable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, insertable = false, columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(nullable = false, insertable = false)
     private LocalDateTime updatedAt;
 }

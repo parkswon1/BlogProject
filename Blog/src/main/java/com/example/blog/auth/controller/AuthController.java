@@ -33,8 +33,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Validated @RequestBody LoginRequest loginRequest) {
         try {
-            Map<String, String> tokens = authService.login(loginRequest);
-            return ResponseEntity.ok(tokens);
+            Map<String, Object> response = authService.login(loginRequest);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));
         }

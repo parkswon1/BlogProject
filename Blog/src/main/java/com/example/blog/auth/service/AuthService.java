@@ -59,7 +59,8 @@ public class AuthService {
     }
 
     // 로그인
-    public Map<String, String> login(LoginRequest loginRequest) {
+    // AuthService.java
+    public Map<String, Object> login(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
@@ -69,11 +70,14 @@ public class AuthService {
         String refreshToken = jwtTokenUtil.generateRefreshToken(authentication);
         redisTemplate.opsForValue().set(loginRequest.getUsername(), refreshToken);
 
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put("accessToken", accessToken);
-        tokens.put("refreshToken", refreshToken);
+        User user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow(() -> new CustomException("User not found"));
 
-        return tokens;
+        Map<String, Object> response = new HashMap<>();
+        response.put("accessToken", accessToken);
+        response.put("refreshToken", refreshToken);
+        response.put("userId", user.getId());
+
+        return response;
     }
 
     // 로그아웃
