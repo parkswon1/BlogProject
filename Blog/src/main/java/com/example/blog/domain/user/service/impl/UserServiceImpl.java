@@ -1,5 +1,6 @@
 package com.example.blog.domain.user.service.impl;
 
+import com.example.blog.domain.image.entity.Image;
 import com.example.blog.domain.image.event.ImageSaveEvent;
 import com.example.blog.domain.user.entity.User;
 import com.example.blog.domain.user.exception.PasswordMismatchException;
@@ -41,8 +42,8 @@ public class UserServiceImpl implements UserService {
 
     //사용자의 프로필 사진을 가져오는 메서드 프로필 없으면 null로 반환 있으면 url로 반환
     @Override
-    public String getUserProfile(Long userId) throws IllegalAccessException {
-        return getUser(userId).getImage().getUrl();
+    public Image getUserProfile(Long userId) throws IllegalAccessException {
+        return getUser(userId).getImage();
     }
 
     //사용자의 프로필을 새로운 사진으로 저장하는 메서드 이벤트 발행을 통해서 사진저장
@@ -64,17 +65,15 @@ public class UserServiceImpl implements UserService {
     public void changePassword(Long userId, String newPassword, String checkPassword) throws IllegalAccessException {
         User user = getUser(userId);
 
-        String checkPasswordEncoded = passwordEncoder.encode(checkPassword);
-        if (!checkPasswordEncoded.equals(user.getPassword())){
+        if (!passwordEncoder.matches(checkPassword, user.getPassword())){
             throw new PasswordMismatchException("사용자 비밀번호가 틀립니다.");
         }
 
-        String newPasswordEncoded = passwordEncoder.encode(newPassword);
-        if (newPasswordEncoded.equals(user.getPassword())){
+        if (passwordEncoder.matches(newPassword, user.getPassword())){
             throw new SameAsOldPasswordException("예전 비밀번호랑 같은 비밀번호로 변경할 수 없습니다.");
         }
 
-        user.setPassword(newPasswordEncoded);
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
 
