@@ -1,6 +1,7 @@
 package com.example.blog.domain.user.Controller;
 
 import com.example.blog.auth.security.CustomUserDetails;
+import com.example.blog.domain.image.entity.Image;
 import com.example.blog.domain.user.entity.User;
 import com.example.blog.domain.user.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -74,13 +75,16 @@ public class UserController {
     //사용자 프로필 사진만 가져오는 api
     @GetMapping("/image/{id}")
     public ResponseEntity<String> getUserProfileImage(@PathVariable Long id){
-        String imageUrl;
+        Image image;
         try {
-            imageUrl = userService.getUserProfile(id);
+            image = userService.getUserProfile(id);
         }catch (IllegalArgumentException | IllegalAccessException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok(imageUrl);
+        if (image == null){
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(image.getUrl());
     }
 
     //user detail로 부터 사용자 id받아오는 로직
