@@ -22,7 +22,7 @@ public class Blog {
     @Column
     private String description;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
