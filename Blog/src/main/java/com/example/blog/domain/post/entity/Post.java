@@ -3,11 +3,13 @@ package com.example.blog.domain.post.entity;
 import com.example.blog.domain.blog.entity.Blog;
 import com.example.blog.domain.category.entity.Category;
 import com.example.blog.domain.image.entity.Image;
+import com.example.blog.domain.tag.entity.PostTag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -34,6 +36,9 @@ public class Post {
     @OneToOne
     @JoinColumn(name = "image_id")
     private Image image;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<PostTag> postTags;
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private int views;
