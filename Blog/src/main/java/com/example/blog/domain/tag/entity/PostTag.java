@@ -1,4 +1,4 @@
-package com.example.blog.domain.posttag.entity;
+package com.example.blog.domain.tag.entity;
 
 import com.example.blog.domain.post.entity.Post;
 import com.example.blog.domain.tag.entity.Tag;
