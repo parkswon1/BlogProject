@@ -48,6 +48,7 @@ CREATE TABLE `Comment` (
 CREATE TABLE `Category` (
                             `id` int PRIMARY KEY AUTO_INCREMENT,
                             `name` varchar(255) UNIQUE NOT NULL,
+                            `parent_id` int,
                             `created_at` datetime DEFAULT (current_timestamp),
                             `updated_at` datetime DEFAULT (current_timestamp)
 );
@@ -108,3 +109,5 @@ ALTER TABLE `Like` ADD FOREIGN KEY (`blog_id`) REFERENCES `Blog` (`id`);
 ALTER TABLE `Like` ADD FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
 
 ALTER TABLE `Like` ADD FOREIGN KEY (`comment_id`) REFERENCES `Comment` (`id`);
+
+ALTER TABLE `Category` ADD FOREIGN KEY (`parent_id`) REFERENCES `Category` (`id`);
