@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface PostService {
-    Post createPost(Long blogId, PostRequest postRequest);
+    Post createPost(Long userId, PostRequest postRequest);
     Post getPostById(Long postId);
     Post updatePost(Long postId, PostRequest postRequest);
     void deletePost(Long postId);
