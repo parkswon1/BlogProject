@@ -29,8 +29,8 @@ public class PostServiceImpl implements PostService {
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
-    public Post createPost(Long blogId, PostRequest postRequest) {
-        BlogFetchEvent blogFetchEvent = new BlogFetchEvent(this, blogId);
+    public Post createPost(Long userId, PostRequest postRequest) {
+        BlogFetchEvent blogFetchEvent = new BlogFetchEvent(this, userId);
         eventPublisher.publishEvent(blogFetchEvent);
         Blog blog = blogFetchEvent.getBlog();
 
