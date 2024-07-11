@@ -79,6 +79,8 @@ CREATE TABLE `Like` (
 CREATE TABLE `Image` (
                          `id` int PRIMARY KEY AUTO_INCREMENT,
                          `url` varchar(255) NOT NULL,
+                         'uuid' varchar(255) NOT NULL,
+                         'name' varchar(255) NOT NULL,
                          `created_at` datetime DEFAULT (current_timestamp)
 );
 
@@ -98,9 +100,9 @@ ALTER TABLE `Comment` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 ALTER TABLE `Comment` ADD FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
 
-ALTER TABLE `PostTag` ADD FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
+ALTER TABLE post_tag ADD FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
 
-ALTER TABLE `PostTag` ADD FOREIGN KEY (`tag_id`) REFERENCES `Tag` (`id`);
+ALTER TABLE post_tag ADD FOREIGN KEY (`tag_id`) REFERENCES `Tag` (`id`);
 
 ALTER TABLE `Like` ADD FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
