@@ -46,10 +46,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Long id) throws IllegalAccessException {
-        if (!categoryRepository.existsById(id)){
-            throw new IllegalAccessException("id로 시작하는 카테고리가 없습니다." + id);
+    public void deleteCategory(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new IllegalArgumentException("id로 시작하는 카테고리가 없습니다." + categoryId));
+
+        if (!category.getSubCategories().isEmpty()) {
+            throw new IllegalArgumentException("하위 카테고리가 있어서 삭제가 불가능합니다.");
         }
-        categoryRepository.deleteById(id);
+
+        categoryRepository.delete(category);
     }
 }
