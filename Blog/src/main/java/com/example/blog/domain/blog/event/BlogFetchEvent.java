@@ -8,11 +8,11 @@ import org.springframework.context.ApplicationEvent;
 @Getter
 @Setter
 public class BlogFetchEvent extends ApplicationEvent {
-    private final Long blogId;
+    private final Long userId;
     private Blog blog;
 
-    public BlogFetchEvent(Object source, Long blogId) {
+    public BlogFetchEvent(Object source, Long userId) {
         super(source);
-        this.blogId = blogId;
+        this.userId = userId;
     }
 }

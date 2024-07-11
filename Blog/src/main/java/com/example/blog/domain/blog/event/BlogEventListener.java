@@ -22,8 +22,8 @@ public class BlogEventListener {
 
     @EventListener
     public void handleBlogFetchEvent(BlogFetchEvent event){
-        Blog blog = blogRepository.findById(event.getBlogId())
-                .orElseThrow(() -> new IllegalArgumentException("블로그를 찾을 수 없습니다. : " + event.getBlogId()));
+        Blog blog = blogRepository.findByUserId(event.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("블로그를 찾을 수 없습니다. 사용자 아이디 : " + event.getUserId()));
         event.setBlog(blog);
     }
 }
