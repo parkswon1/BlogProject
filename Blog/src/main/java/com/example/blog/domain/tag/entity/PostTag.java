@@ -1,7 +1,6 @@
 package com.example.blog.domain.tag.entity;
 
 import com.example.blog.domain.post.entity.Post;
-import com.example.blog.domain.tag.entity.Tag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
+@Table(name = "post_tag")
 public class PostTag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
