@@ -2,7 +2,6 @@ package com.example.blog.domain.category.controller;
 
 import com.example.blog.domain.category.entity.Category;
 import com.example.blog.domain.category.service.CategoryService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
