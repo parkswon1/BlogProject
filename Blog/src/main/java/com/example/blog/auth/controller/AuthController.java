@@ -22,7 +22,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Validated @RequestBody RegisterRequest registerRequest) {
         try {
-            Map<String, String> tokens = authService.register(registerRequest);
+            Map<String, Object> tokens = authService.register(registerRequest);
             return ResponseEntity.ok(tokens);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
@@ -56,7 +56,7 @@ public class AuthController {
     public ResponseEntity<?> refreshAccessToken(@RequestHeader("Authorization") String token) {
         try {
             String refreshToken = token.replace("Bearer ", "");
-            Map<String, String> tokens = authService.refreshAccessToken(refreshToken);
+            Map<String, Object> tokens = authService.refreshAccessToken(refreshToken);
             return ResponseEntity.ok(tokens);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", e.getMessage()));

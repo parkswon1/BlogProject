@@ -96,4 +96,9 @@ public class BlogServiceImpl implements BlogService {
         }
         return allPage;
     }
+
+    @Override
+    public Blog getBlogById(Long blogId){
+        return blogRepository.findById(blogId).orElse(null);
+    }
 }

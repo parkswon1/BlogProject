@@ -31,7 +31,7 @@ public class AuthService {
     private final UserDetailsService userDetailsService;
 
     // 회원가입
-    public Map<String, String> register(RegisterRequest registerRequest) {
+    public Map<String, Object> register(RegisterRequest registerRequest) {
         if (userRepository.findByUsername(registerRequest.getUsername()).isPresent()) {
             throw new CustomException("이미 있는 이메일 입니다.");
         }
@@ -51,9 +51,11 @@ public class AuthService {
         String refreshToken = jwtTokenUtil.generateRefreshToken(authentication);
         redisTemplate.opsForValue().set(user.getUsername(), refreshToken);
 
-        Map<String, String> tokens = new HashMap<>();
+        user = userRepository.findByUsername(registerRequest.getUsername()).orElseThrow(() -> new CustomException("User not found"));
+        Map<String, Object> tokens = new HashMap<>();
         tokens.put("accessToken", accessToken);
         tokens.put("refreshToken", refreshToken);
+        tokens.put("userId", user.getId());
 
         return tokens;
     }
@@ -95,7 +97,7 @@ public class AuthService {
     }
 
     // 리프레시 토큰을 사용한 액세스 토큰, 리프레시 토큰 재발급
-    public Map<String, String> refreshAccessToken(String refreshToken) {
+    public Map<String, Object> refreshAccessToken(String refreshToken) {
         try {
             String username = jwtTokenUtil.extractUsername(refreshToken, false);
             if (username == null) {
@@ -111,10 +113,12 @@ public class AuthService {
                 String newAccessToken = jwtTokenUtil.generateAccessToken(authentication);
                 String newRefreshToken = jwtTokenUtil.generateRefreshToken(authentication);
                 redisTemplate.opsForValue().set(username, newRefreshToken);
+                User user = userRepository.findByUsername(username).orElseThrow(() -> new CustomException("User not found"));
 
-                Map<String, String> tokens = new HashMap<>();
+                Map<String, Object> tokens = new HashMap<>();
                 tokens.put("accessToken", newAccessToken);
                 tokens.put("refreshToken", newRefreshToken);
+                tokens.put("userId", user.getId());
 
                 return tokens;
             } else {

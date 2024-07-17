@@ -11,4 +11,5 @@ public interface BlogService {
     Blog getBlogByBlogId(Long blogId, Long viewerId) throws IllegalAccessException;
     Blog getBlogByUserId(Long uesrId, Long viewerId) throws IllegalAccessException;
     Page<Blog> getBlogsList(Pageable pageable) throws IllegalAccessException;
+    public Blog getBlogById(Long blogId);
 }
