@@ -9,6 +9,7 @@ import com.example.blog.domain.post.dto.PostRequest;
 import com.example.blog.domain.post.entity.Post;
 import com.example.blog.domain.post.event.PostViewIncrementEvent;
 import com.example.blog.domain.post.repository.PostRepository;
+import com.example.blog.domain.post.repository.PostTagRepository;
 import com.example.blog.domain.post.service.PostService;
 import com.example.blog.domain.tag.entity.PostTag;
 import com.example.blog.domain.tag.entity.Tag;
@@ -27,6 +28,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final PostTagRepository postTagRepository;
 
     @Override
     public Post createPost(Long userId, PostRequest postRequest) {
@@ -59,6 +61,7 @@ public class PostServiceImpl implements PostService {
                 PostTag postTag = new PostTag();
                 postTag.setPost(post);
                 postTag.setTag(tag);
+                postTagRepository.save(postTag);
                 post.getPostTags().add(postTag);
             }
         }

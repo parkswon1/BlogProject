@@ -4,11 +4,13 @@ import com.example.blog.domain.blog.entity.Blog;
 import com.example.blog.domain.category.entity.Category;
 import com.example.blog.domain.image.entity.Image;
 import com.example.blog.domain.tag.entity.PostTag;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +40,8 @@ public class Post {
     private Image image;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<PostTag> postTags;
+    @JsonManagedReference
+    private List<PostTag> postTags = new ArrayList<>();
 
     @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
     private int views;
