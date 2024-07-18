@@ -1,7 +1,6 @@
 package com.example.blog.domain.like.service.impl;
 
 import com.example.blog.domain.blog.service.BlogService;
-import com.example.blog.domain.comment.service.CommentService;
 import com.example.blog.domain.like.entity.Like;
 import com.example.blog.domain.like.repository.LikeRepository;
 import com.example.blog.domain.like.service.LikeService;
@@ -11,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,8 +31,8 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void unlikePost(Long userId, Long postId) {
-        likeRepository.findByUserIdAndPostId(userId, postId);
-        likeRepository.deleteById(postId);
+        Optional<Like> like = likeRepository.findByUserIdAndPostId(userId, postId);
+        likeRepository.deleteById(like.get().getId());
     }
 
     @Override
@@ -45,8 +45,8 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     public void unlikeBlog(Long uesrId, Long blogId) {
-        likeRepository.findByUserIdAndBlogId(uesrId, blogId);
-        likeRepository.deleteById(blogId);
+        Optional<Like> like = likeRepository.findByUserIdAndBlogId(uesrId, blogId);
+        likeRepository.deleteById(like.get().getId());
     }
 
     @Override
